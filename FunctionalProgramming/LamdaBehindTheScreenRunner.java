@@ -1,5 +1,6 @@
 package FunctionalProgramming;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 class EvenNumberPredicate implements Predicate<Integer> {
@@ -7,6 +8,14 @@ class EvenNumberPredicate implements Predicate<Integer> {
     @Override
     public boolean test(Integer number) {
         return number % 2 == 0;
+    }
+}
+
+class SystemOutConsumer implements Consumer<Integer> {
+
+    @Override
+    public void accept(Integer number) {
+        System.out.println(number);
     }
 }
 
@@ -21,6 +30,6 @@ public class LamdaBehindTheScreenRunner {
 
         List.of(23, 43, 24, 45, 36, 48).stream()
                 .filter(new EvenNumberPredicate())
-                .forEach(el -> System.out.println(el));
+                .forEach(new SystemOutConsumer());
     }
 }

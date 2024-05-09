@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3868f043-8437-4031-80fd-4b8e7d0bc302" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FunctionalProgramming/LamdaBehindTheScreenRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/FunctionalProgramming/LamdaBehindTheScreenRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715066400166</updated>
       <workItem from="1715066400167" duration="365000" />
-      <workItem from="1715088208636" duration="1752000" />
+      <workItem from="1715088208636" duration="11677000" />
     </task>
     <servers />
   </component>
