@@ -26,7 +26,7 @@ class MemberServiceTest {
   }
 
   @Test
-  void join() {
+  void 회원가입() {
     //given
     Member member = new Member();
     member.setName("hello");
