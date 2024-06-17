@@ -25,16 +25,16 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll(OrderSearch orderSearch) {
-        /* 동적 쿼리를 어떻게 해결할까? 값이 모두 들어있다고 보장할 수 없다.*/
-        return em.createQuery("select o from Order o join o.member m" +
-                        " where o.status = :status " +
-                        "and m.name like :name", Order.class)
-                .setParameter("status", orderSearch.getOrderStatus())
-                .setParameter("name", orderSearch.getMemberName())
-                .setMaxResults(1000) // 최대 1000건
-                .getResultList();
-    }
+//    public List<Order> findAll(OrderSearch orderSearch) {
+//        /* 동적 쿼리를 어떻게 해결할까? 값이 모두 들어있다고 보장할 수 없다.*/
+//        return em.createQuery("select o from Order o join o.member m" +
+//                        " where o.status = :status " +
+//                        "and m.name like :name", Order.class)
+//                .setParameter("status", orderSearch.getOrderStatus())
+//                .setParameter("name", orderSearch.getMemberName())
+//                .setMaxResults(1000) // 최대 1000건
+//                .getResultList();
+//    }
 
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

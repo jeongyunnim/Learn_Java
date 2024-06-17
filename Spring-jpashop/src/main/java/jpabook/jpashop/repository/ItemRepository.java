@@ -1,23 +1,23 @@
 package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
+import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ItemRepository {
     private final EntityManager em;
 
+    @Transactional
     public void save(Item item) {
-        if (item.getId() == null) { // JPA에 저장하기 전까지 id 값이 없다.
-            em.persist(item);
-        } else {
-            em.merge(item); // update 비슷한
-        }
+        em.persist(item);
     }
 
     public Item findById(Long id) {
