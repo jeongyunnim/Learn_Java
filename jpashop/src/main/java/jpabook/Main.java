@@ -5,7 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Team;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import java.util.List;
 
@@ -17,21 +18,12 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            Order order = new Order();
+            em.persist(order);
+            order.addOrderItem(new OrderItem());
+            em.persist(order);
 
-            Member member = new Member();
-            member.setUsername("member1");
-//            member.setTeamId(team.getId());
-            member.setTeam(team);
-            em.persist(member);
-
-            Member findMember = em.find(Member.class, member.getId());
-
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
-            tx.commit(); 
+            tx.commit();
         } catch (Exception e) {
             System.out.println("e = " + e);
             tx.rollback();
