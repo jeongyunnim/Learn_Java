@@ -2,13 +2,22 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    active: git
+  # active: native # file system & class path & location
   cloud:
     config:
       server:
-        native:
-          search-locations: "file:///Users//seojeong-yun//config"
+        git:
+          uri: "https://github.com/jeongyunnim/spring-msa-tutorial-config.git"
+          default-label: "main"
+          timeout: 5 # config server should wait only for maximum 5 seconds
+          clone-on-start: true # try to clone the GitHub repo into local system during the startup itself
+          force-pull: true # 로컬의 변경사항을 git의 내용으로 항상 덮어쓰도록 함
+#        native:
+#          search-locations: "file:///Users//seojeong-yun//config"
+
+encrypt:
+  key: "01076427521"
 
 server:
   port: 8071
-
