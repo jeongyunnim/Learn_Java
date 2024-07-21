@@ -22,3 +22,16 @@ spring:
 
   config:
     import: "optional:configserver:http://localhost:8071" # optional: config 서버가 동작하지 않더라도 돌아갈 수 있도록 함
+
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
