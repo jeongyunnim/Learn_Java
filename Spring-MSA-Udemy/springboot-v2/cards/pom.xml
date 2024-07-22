@@ -83,10 +83,22 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.4.1</version>
+				<version>3.4.3</version>
 				<configuration>
+					<from>
+						<platforms>
+							<platform>
+								<architecture>amd64</architecture>
+								<os>linux</os>
+							</platform>
+							<platform>
+								<architecture>arm64</architecture>
+								<os>linux</os>
+							</platform>
+						</platforms>
+					</from>
 					<to>
-						<image>eazybytes/${project.artifactId}:s6</image>
+						<image>jeongyun7521/${project.artifactId}:s6</image>
 					</to>
 				</configuration>
 			</plugin>

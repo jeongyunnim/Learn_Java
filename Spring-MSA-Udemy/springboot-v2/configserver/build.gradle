@@ -2,8 +2,28 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.1'
     id 'io.spring.dependency-management' version '1.1.5'
+    id 'com.google.cloud.tools.jib' version '3.4.3'
 }
 
+jib {
+    from {
+//        image = "openjdk:17-jdk-slim"
+        platforms {
+            platform {
+                architecture = 'amd64'
+                os = 'linux'
+            }
+            platform {
+                architecture = 'arm64'
+                os = 'linux'
+            }
+        }
+    }
+    to {
+        image = "jeongyun7521/${project.name}"
+        tags = ["s6"]
+    }
+}
 group = 'com.easybytes'
 version = '0.0.1-SNAPSHOT'
 
