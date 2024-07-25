@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+  # active: native # file system & class path & location
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/jeongyunnim/spring-msa-tutorial-config.git"
+          default-label: "main"
+          timeout: 5 # config server should wait only for maximum 5 seconds
+          clone-on-start: true # try to clone the GitHub repo into local system during the startup itself
+          force-pull: true # 로컬의 변경사항을 git의 내용으로 항상 덮어쓰도록 함
+#        native:
+#          search-locations: "file:///Users//seojeong-yun//config"
+
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+encrypt:
+  key: "01076427521"
+
+server:
+  port: 8071
+

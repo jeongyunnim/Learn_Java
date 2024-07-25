@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: "accounts" # config server 에서 이 곳에 등록된 이름으로 찾아간다.
+  profiles:
+    active: "prod"
+  datasource:
+    url: jdbc:postgresql://applicationdb:${APPLICATIONS_DB_PORT}/${APPLICATIONS_DB_NAME}
+    username: ${APPLICATIONS_DB_USER}
+    password: ${APPLICATIONS_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+
+  #    console:
+#      enabled: true
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:8071" # optional: config 서버가 동작하지 않더라도 돌아갈 수 있도록 함
+
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
