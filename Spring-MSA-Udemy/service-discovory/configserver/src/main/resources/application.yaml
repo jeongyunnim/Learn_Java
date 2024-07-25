@@ -15,12 +15,12 @@ spring:
           force-pull: true # 로컬의 변경사항을 git의 내용으로 항상 덮어쓰도록 함
 #        native:
 #          search-locations: "file:///Users//seojeong-yun//config"
-
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management:
   endpoints:

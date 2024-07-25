@@ -23,15 +23,38 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071" # optional: config 서버가 동작하지 않더라도 돌아갈 수 있도록 함
 
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+endpoints:
+  shutdown:
+    enabled: true
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "accounts"
+    description: "Jeseo's Accounts Application"
+    version: "1.0.0"
