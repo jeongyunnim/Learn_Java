@@ -108,7 +108,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>jeongyun7521/${project.artifactId}:s6</image>
+						<image>jeongyun7521/${project.artifactId}:s8</image>
 					</to>
 				</configuration>
 			</plugin>
