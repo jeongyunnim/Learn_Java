@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071"
+  cloud:
+    gateway:
+      discovery: # gateway에게 discover server(유레카 서버)에서
+        locator: # 서비스를 찾을 수 있도록 설정
+          enabled: true
+          lower-case-service-id: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Jeseo's Gateway Server Application"
+    version: "1.0.0"
