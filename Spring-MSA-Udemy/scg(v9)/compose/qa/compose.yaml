@@ -15,6 +15,24 @@ services:
       file: common-config.yaml
       service: microservice-base-config
 
+  gatewayserver:
+    image: "jeongyun7521/gatewayserver:s9"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    extends:
+      file: common-config.yaml
+      service: microservice-eureka-config
+
   eurekaserver:
     image: "jeongyun7521/eureka:s9"
     container_name: eurekaserver-ms
@@ -45,6 +63,12 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     environment:
       SPRING_APPLICATION_NAME: "accounts"
     extends:
@@ -61,12 +85,17 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     environment:
       SPRING_APPLICATION_NAME: "loans"
     extends:
       file: common-config.yaml
       service: microservice-eureka-config
-
 
   cards:
     image: "jeongyun7521/cards:s9"
@@ -78,6 +107,12 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
     environment:
       SPRING_APPLICATION_NAME: "cards"
     extends:
