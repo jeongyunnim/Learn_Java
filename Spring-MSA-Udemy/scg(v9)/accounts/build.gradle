@@ -8,12 +8,12 @@ plugins {
 
 jib {
     from {
-        image = "openjdk:17-jdk-slim"
+        image = "jeongyun7521/curl-jdk-image:v1"
         platforms {
-            platform {
-                architecture = 'amd64'
-                os = 'linux'
-            }
+//            platform {
+//                architecture = 'amd64'
+//                os = 'linux'
+//            }
             platform {
                 architecture = 'arm64'
                 os = 'linux'

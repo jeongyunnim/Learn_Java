@@ -35,12 +35,17 @@ management:
   endpoint:
     shutdown:
       enabled: true
+    health:
+      probes:
+        enabled: true
   info:
     env:
       enabled: true
-endpoints:
-  shutdown:
-    enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
 
 eureka:
   instance:

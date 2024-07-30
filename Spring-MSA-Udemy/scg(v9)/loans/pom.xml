@@ -96,11 +96,12 @@
 				<version>3.4.3</version>
 				<configuration>
 					<from>
+						<image>jeongyun7521/curl-jdk-image:v1</image>
 						<platforms>
-							<platform>
-								<architecture>amd64</architecture>
-								<os>linux</os>
-							</platform>
+<!--							<platform>-->
+<!--								<architecture>amd64</architecture>-->
+<!--								<os>linux</os>-->
+<!--							</platform>-->
 							<platform>
 								<architecture>arm64</architecture>
 								<os>linux</os>
