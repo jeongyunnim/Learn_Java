@@ -26,3 +26,10 @@ info:
     name: "gatewayserver"
     description: "Jeseo's Gateway Server Application"
     version: "1.0.0"
+
+logging:
+  level:
+    org:
+      example:
+        gatewayserver: DEBUG
+
