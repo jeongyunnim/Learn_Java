@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient("loans") // eureka 서버에 등록된 이름으로 해당 정보를 받아온다.
+@FeignClient(name = "loans", fallback = LoansFallback.class) // eureka 서버에 등록된 이름으로 해당 정보를 받아온다.
 public interface LoansFeignClient {
 
     @GetMapping(value = "/api/fetch", consumes = "application/json")

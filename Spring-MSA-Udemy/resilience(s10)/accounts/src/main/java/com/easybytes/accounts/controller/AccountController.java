@@ -6,6 +6,7 @@ import com.easybytes.accounts.dto.CustomerDto;
 import com.easybytes.accounts.dto.ErrorResponseDto;
 import com.easybytes.accounts.dto.ResponseDto;
 import com.easybytes.accounts.service.IAccountsService;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,13 +16,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,7 @@ public class AccountController {
     private final IAccountsService iAccountsService;
     private final Environment environment;
     private final AccountsContactInfoDto accountsContactInfoDto;
+    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Value("${build.version}")
     private String buildVersion;
@@ -148,9 +150,21 @@ public class AccountController {
             responseCode = "200",
             description = "HTTP Status OK"
     )
+    @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
-        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+        logger.debug("getBuildInfo() method Invoked");
+        throw new NullPointerException();
+        /*return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);*/
+    }
+
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        logger.debug("getBuildInfoFallback() method Invoked");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("0.9");
     }
 
 

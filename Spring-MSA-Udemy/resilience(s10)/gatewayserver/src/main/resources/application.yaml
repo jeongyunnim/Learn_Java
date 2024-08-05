@@ -9,6 +9,9 @@ spring:
         locator: # 서비스를 찾을 수 있도록 설정
           enabled: true
           lower-case-service-id: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 2s
 management:
   endpoints:
     web:
