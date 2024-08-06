@@ -12,6 +12,13 @@ spring:
       httpclient:
         connect-timeout: 1000
         response-timeout: 2s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
+
 management:
   endpoints:
     web:
@@ -43,4 +50,4 @@ resilience4j:
         sliding-window-size: 10 # close에서 open 상태로 전환하기 전에 모니터링할 최소 요청
         permitted-number-of-calls-in-half-open-state: 2 # half open 상태에서 open할지 close할지 결정하는 요청의 개수
         failure-rate-threshold: 50 # 실패율: CLOSE 상태로 OPEN 상태로 전환
-        wait-duration-in-open-state: 10000 # millisecond: 10s
+        wait-duration-in-open-state: 50000 # millisecond: 10s
