@@ -1,4 +1,4 @@
-VERSION = s9
+VERSION = s10
 
 up:
 	cd compose/default && docker compose up -d
@@ -6,7 +6,7 @@ up:
 down:
 	cd compose/default && docker compose down
 
-all: accounts gatewayserver cards loans eureka configserver
+build: accounts gatewayserver cards loans eureka configserver
 
 accounts:
 	cd accounts && ./gradlew jib
