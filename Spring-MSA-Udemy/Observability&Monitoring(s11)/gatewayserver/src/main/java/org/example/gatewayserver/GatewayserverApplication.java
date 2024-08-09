@@ -49,7 +49,8 @@ public class GatewayserverApplication {
 						.path("/eazybank/cards/**")
 						.filters( f -> f.rewritePath("/eazybank/cards/(?<segment>.*)","/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter()).setKeyResolver(userKeyResolver())))
+//								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter()).setKeyResolver(userKeyResolver()))
+						)
 						.uri("lb://CARDS")).build();
 	}
 
@@ -60,14 +61,14 @@ public class GatewayserverApplication {
 				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
 	}
 
-	@Bean
-	public RedisRateLimiter redisRateLimiter() {
-		return new RedisRateLimiter(1,1,1);
-	}
-
-	@Bean
-	KeyResolver userKeyResolver() {
-		return exchange -> Mono.justOrEmpty(exchange.getRequest().getQueryParams().getFirst("user"))
-				.defaultIfEmpty("anonymous");
-	}
+//	@Bean
+//	public RedisRateLimiter redisRateLimiter() {
+//		return new RedisRateLimiter(1,1,1);
+//	}
+//
+//	@Bean
+//	KeyResolver userKeyResolver() {
+//		return exchange -> Mono.justOrEmpty(exchange.getRequest().getQueryParams().getFirst("user"))
+//				.defaultIfEmpty("anonymous");
+//	}
 }

@@ -1,4 +1,4 @@
-VERSION = s10
+VERSION = s11
 
 up:
 	cd compose/default && docker compose up -d

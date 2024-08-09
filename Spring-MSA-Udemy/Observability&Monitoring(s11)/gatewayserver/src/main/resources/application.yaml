@@ -11,7 +11,8 @@ spring:
           lower-case-service-id: true
       httpclient:
         connect-timeout: 1000
-        response-timeout: 2s
+#        response-timeout: 2s << 컨테이너가 점점 늘어감에 따라 시스템이 느려질 수 있다.
+        response-timeout: 10s
   data:
     redis:
       connect-timeout: 2s
