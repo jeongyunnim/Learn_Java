@@ -81,6 +81,19 @@ services:
       file: common-config.yaml
       service: network-deploy-service
 
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../observability/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    extends:
+      file: common-config.yaml
+      service: network-deploy-service
+
+
+
   grafana:
     image: grafana/grafana:latest
     environment:
@@ -93,22 +106,11 @@ services:
       - sh
       - -euc
       - |
-        mkdir -p /etc/grafana/provisioning/datasources
-        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
-        apiVersion: 1
-        datasources:
-          - name: Loki
-            type: loki
-            access: proxy
-            url: http://gateway:3100
-            jsonData:
-              httpHeaderName1: "X-Scope-OrgID"
-            secureJsonData:
-              httpHeaderValue1: "tenant1"
-        EOF
         /run.sh
     ports:
       - "3000:3000"
+    volumes:
+      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/ds.yaml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -134,7 +136,8 @@ services:
 
 
   gateway:
-    image: nginx:latest
+    image: nginx:1.25.5
+    container_name: gateway
     depends_on:
       - read
       - write
@@ -257,7 +260,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    image: "jeongyun7521/accounts:s9"
+    image: "jeongyun7521/accounts:s11"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -279,7 +282,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "jeongyun7521/loans:s9"
+    image: "jeongyun7521/loans:s11"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -301,7 +304,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "jeongyun7521/cards:s9"
+    image: "jeongyun7521/cards:s11"
     container_name: cards-ms
     ports:
       - "9000:9000"

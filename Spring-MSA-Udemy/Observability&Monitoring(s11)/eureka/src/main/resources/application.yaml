@@ -4,17 +4,24 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8071"
 management:
-  health:
-    readinessstate:
-      enabled: true
-    livenessstate:
-      enabled: true
-
   endpoints:
     web:
       exposure:
         include: "*"
   endpoint:
+    shutdown:
+      enabled: true
     health:
       probes:
         enabled: true
+  info:
+    env:
+      enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}

@@ -1,4 +1,5 @@
 VERSION = s11
+DOCKER_USER = jeongyun7521
 
 up:
 	cd compose/default && docker compose up -d
@@ -25,5 +26,8 @@ eureka:
 
 configserver:
 	cd configserver && ./gradlew jib
+
+clean:
+	docker rm image ${DOCKER_USER}/*
 
 .PHONY: build up all accounts gatewayserver cards loans eureka configserver
