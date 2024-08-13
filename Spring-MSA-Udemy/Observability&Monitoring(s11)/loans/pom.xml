@@ -91,6 +91,11 @@
 <!--			<groupId>org.springframework.cloud</groupId>-->
 <!--			<artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
 <!--		</dependency>-->
+		<dependency>
+			<groupId>io.opentelemetry.javaagent</groupId>
+			<artifactId>opentelemetry-javaagent</artifactId>
+			<version>1.33.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>

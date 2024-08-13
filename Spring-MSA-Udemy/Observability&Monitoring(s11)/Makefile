@@ -27,7 +27,9 @@ eureka:
 configserver:
 	cd configserver && ./gradlew jib
 
-clean:
-	docker rm image ${DOCKER_USER}/*
+re: clean up
 
-.PHONY: build up all accounts gatewayserver cards loans eureka configserver
+clean: down
+	docker images -a | grep "jeongyun7521/" | awk '{print $$3}' | xargs docker rmi
+
+.PHONY: build up all accounts gatewayserver cards loans eureka configserver re clean

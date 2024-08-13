@@ -43,7 +43,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -85,6 +84,12 @@
 <!--			<groupId>org.springframework.cloud</groupId>-->
 <!--			<artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
 <!--		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/io.opentelemetry.javaagent/opentelemetry-javaagent -->
+		<dependency>
+			<groupId>io.opentelemetry.javaagent</groupId>
+			<artifactId>opentelemetry-javaagent</artifactId>
+			<version>1.33.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
