@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071"
+  cloud:
+    gateway:
+      discovery: # gateway에게 discover server(유레카 서버)에서
+        locator: # 서비스를 찾을 수 있도록 설정
+          enabled: true
+          lower-case-service-id: true
+      httpclient:
+        connect-timeout: 1000
+#        response-timeout: 2s << 컨테이너가 점점 늘어감에 따라 시스템이 느려질 수 있다.
+        response-timeout: 10s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Jeseo's Gateway Server Application"
+    version: "1.0.0"
+
+logging:
+  level:
+    org:
+      example:
+        gatewayserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name}, %X{trace_id}, %X{span_id}]"
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default: # 모든 서킷 브레이커에 적용
+        sliding-window-size: 10 # close에서 open 상태로 전환하기 전에 모니터링할 최소 요청
+        permitted-number-of-calls-in-half-open-state: 2 # half open 상태에서 open할지 close할지 결정하는 요청의 개수
+        failure-rate-threshold: 50 # 실패율: CLOSE 상태로 OPEN 상태로 전환
+        wait-duration-in-open-state: 50000 # millisecond: 10s
