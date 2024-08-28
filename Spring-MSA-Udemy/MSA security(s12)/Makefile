@@ -1,4 +1,4 @@
-VERSION = s11
+VERSION = s12
 DOCKER_USER = jeongyun7521
 
 up:

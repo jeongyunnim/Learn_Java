@@ -21,7 +21,7 @@ jib {
 	}
 	to {
 		image = "jeongyun7521/${project.name}"
-		tags = ["s11"]
+		tags = ["s12"]
 	}
 }
 

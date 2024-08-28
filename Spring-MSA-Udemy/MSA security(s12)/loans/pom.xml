@@ -119,7 +119,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>jeongyun7521/${project.artifactId}:s11</image>
+						<image>jeongyun7521/${project.artifactId}:s12</image>
 					</to>
 				</configuration>
 			</plugin>
