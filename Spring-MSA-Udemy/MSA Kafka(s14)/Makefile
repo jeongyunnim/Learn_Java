@@ -13,7 +13,7 @@ accounts:
 	cd accounts && ./gradlew jib
 
 gatewayserver:
-Ï	cd gatewayserver && ./gradlew jib
+	cd gatewayserver && ./gradlew jib
 
 cards:
 	cd cards && ./mvnw compile jib:build

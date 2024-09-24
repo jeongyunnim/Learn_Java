@@ -70,7 +70,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation group: 'io.opentelemetry.javaagent', name: 'opentelemetry-javaagent', version: '1.33.5'
     implementation 'org.springframework.cloud:spring-cloud-stream'
-    implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+    implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
 }
 
 dependencyManagement {
